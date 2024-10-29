@@ -220,6 +220,24 @@ const TransferDetails: FC<ConnectorProps> = ({
             label="Transfer State"
             value={transferDetails.transferState || ''}
           />
+          <FormField
+            disabled
+            type="text"
+            label="Fx Transfer ID"
+            value={transferDetails.transferId!}
+          />
+          <FormField
+            disabled
+            type="text"
+            label="Fx Quote Id"
+            value={transferDetails.quoteId?.toString() || ''}
+          />
+          <FormField
+            disabled
+            type="text"
+            label="Fx Transfer State"
+            value={transferDetails.transferState || ''}
+          />
           {errorCodeField || <div />}
         </FormField.Container>
 
@@ -260,6 +278,39 @@ const TransferDetails: FC<ConnectorProps> = ({
               onsetJsonModalData({
                 title: 'Party Lookup Events',
                 json: transferDetails.partyLookupEvents || {},
+              });
+            }}
+          />
+          <Button
+            size="small"
+            kind="primary"
+            label="Fx Quote Events"
+            onClick={() => {
+              onsetJsonModalData({
+                title: 'Fx Quote Events',
+                json: transferDetails.quoteEvents || {},
+              });
+            }}
+          />
+          <Button
+            size="small"
+            kind="primary"
+            label="Fx Transfer Events"
+            onClick={() => {
+              onsetJsonModalData({
+                title: 'Fx Transfer Events',
+                json: transferDetails.transferEvents || {},
+              });
+            }}
+          />
+          <Button
+            size="small"
+            kind="primary"
+            label="Fx Settlement Events"
+            onClick={() => {
+              onsetJsonModalData({
+                title: 'Fx Settlement Events',
+                json: transferDetails.settlementEvents || {},
               });
             }}
           />
