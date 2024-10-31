@@ -94,10 +94,40 @@ export type Transfer = {
   conversionTerms?: Maybe<ConversionTerms>;
   fxQuotes?: Maybe<Amount>;
   fxTransfers?: Maybe<Amount>;
+  transaction?: Maybe<Transaction>;
   partyLookupEvents?: Maybe<Scalars['JSONObject']>;
   quoteEvents?: Maybe<Scalars['JSONObject']>;
   transferEvents?: Maybe<Scalars['JSONObject']>;
   settlementEvents?: Maybe<Scalars['JSONObject']>;
+};
+
+export type Transaction = {
+  id: Scalars['Int'];
+  transferId: Scalars['String'];
+  transactionId?: Maybe<Scalars['String']>;
+  sourceAmount?: Maybe<Scalars['Float']>;
+  sourceCurrency?: Maybe<Scalars['String']>;
+  targetAmount?: Maybe<Scalars['Float']>;
+  targetCurrency?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  lastUpdated?: Maybe<Scalars['DateTime']>;
+  transferState?: Maybe<Scalars['String']>;
+  transferStateChanges?: Maybe<Scalars['String']>;
+  transactionType?: Maybe<Scalars['String']>;
+  errorCode?: Maybe<Scalars['String']>;
+  transferSettlementWindowId?: Maybe<Scalars['Int']>;
+  payerDFSP?: Maybe<DFSP>;
+  payerDFSPProxy?: Maybe<Scalars['String']>;
+  payeeDFSP?: Maybe<DFSP>;
+  payeeDFSPProxy?: Maybe<Scalars['String']>;
+  positionChanges?: Maybe<Scalars['Int']>;
+  payerPartyId?: Maybe<Scalars['Int']>;
+  payeePartyId?: Maybe<Party>;
+  quoteRequestId?: Maybe<Scalars['Int']>;
+  quoteRequest?: Maybe<TransferTerms>;
+  transferTermsId?: Maybe<Scalars['Int']>;
+  transferTerms?: Maybe<TransferTerms>;
+  conversions?: Maybe<Conversion>;
 };
 
 export type TransferTerms = {
@@ -208,10 +238,48 @@ export type TransferSummaryFilter = {
 
 export type TransferSummary = {
   __typename?: 'TransferSummary';
-  count: Scalars['Int'];
+  id: Scalars['Int'];
   amount?: Maybe<Scalars['Int']>;
   errorCode?: Maybe<Scalars['Int']>;
   payerDFSP?: Maybe<Scalars['String']>;
   payeeDFSP?: Maybe<Scalars['String']>;
   currency?: Maybe<Scalars['Currency']>;
+};
+
+export type TransferStateChange = {
+  id: Scalars['Int'];
+  transferState?: Maybe<Scalars['String']>;
+  dateTime?: Maybe<Scalars['DateTime']>;
+  reason?: Maybe<Scalars['String']>;
+  transactionId?: Maybe<Scalars['Int']>;
+  Transaction?: Maybe<Transaction>;
+};
+
+export type PositionChange = {
+  id: Scalars['Int'];
+  participantName?: Maybe<Scalars['String']>;
+  currency?: Maybe<Scalars['String']>;
+  ledgerType?: Maybe<Scalars['String']>;
+  dateTime?: Maybe<Scalars['DateTime']>;
+  updatedPosition?: Maybe<Scalars['String']>;
+  change?: Maybe<Scalars['String']>;
+  transactionId?: Maybe<Scalars['Int']>;
+  Transaction?: Maybe<Transaction>;
+};
+
+export type SettlementWindow = {
+  id: Scalars['Int'];
+  settlementWindowId?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
+  Settlement?: Maybe<Settlement>;
+};
+
+export type Settlement = {
+  id: Scalars['Int'];
+  settlementId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  lastUpdatedAt?: Maybe<Scalars['DateTime']>;
+  settlementModel?: Maybe<Scalars['String']>;
+  settlementStatus?: Maybe<Scalars['String']>;
+  SettlementWindows?: Maybe<SettlementWindow>;
 };

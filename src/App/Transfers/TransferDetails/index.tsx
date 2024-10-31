@@ -65,9 +65,7 @@ const TransferDetails: FC<ConnectorProps> = ({
             disabled
             type="text"
             label="FXP"
-            value={`${transferDetails.payerParty?.firstName || ''} ${
-              transferDetails.toString() || ''
-            }`}
+            value={transferDetails.conversions?.counterPartyFSP || ''}
           />
           <FormField
             disabled
@@ -172,25 +170,25 @@ const TransferDetails: FC<ConnectorProps> = ({
             disabled
             type="text"
             label="Transfer Settlement Batch ID"
-            value={transferDetails.toString() || ''}
+            value={transferDetails.settlementWindowId?.toString() || ''}
           />
           <FormField
             disabled
             type="text"
             label="Conversion Settlement Batch ID"
-            value={transferDetails.toString() || ''}
+            value={transferDetails.conversions?.conversionSettlementWindowId?.toString() || ''}
           />
           <FormField
             disabled
             type="text"
             label="Payer DFSP Proxy"
-            value={transferDetails.toString() || ''}
+            value={transferDetails.transaction?.payerDFSPProxy?.toString() || ''}
           />
           <FormField
             disabled
             type="text"
             label="Payee DFSP Proxy"
-            value={transferDetails.toString() || ''}
+            value={transferDetails.transaction?.payeeDFSPProxy?.toString() || ''}
           />
           <FormField
             disabled
